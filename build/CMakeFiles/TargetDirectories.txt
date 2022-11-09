@@ -1,0 +1,9 @@
+C:/Users/fsebasti1/source/repos/RoboticAsteroidRedirect/build/CMakeFiles/Experimental.dir
+C:/Users/fsebasti1/source/repos/RoboticAsteroidRedirect/build/CMakeFiles/Nightly.dir
+C:/Users/fsebasti1/source/repos/RoboticAsteroidRedirect/build/CMakeFiles/Continuous.dir
+C:/Users/fsebasti1/source/repos/RoboticAsteroidRedirect/build/CMakeFiles/NightlyMemoryCheck.dir
+C:/Users/fsebasti1/source/repos/RoboticAsteroidRedirect/build/CMakeFiles/RoboticAsteroidRedirect.dir
+C:/Users/fsebasti1/source/repos/RoboticAsteroidRedirect/build/CMakeFiles/PACKAGE.dir
+C:/Users/fsebasti1/source/repos/RoboticAsteroidRedirect/build/CMakeFiles/RUN_TESTS.dir
+C:/Users/fsebasti1/source/repos/RoboticAsteroidRedirect/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/fsebasti1/source/repos/RoboticAsteroidRedirect/build/CMakeFiles/ZERO_CHECK.dir

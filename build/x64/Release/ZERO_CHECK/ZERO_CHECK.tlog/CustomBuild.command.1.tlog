@@ -1,0 +1,10 @@
+^C:\USERS\FSEBASTI1\SOURCE\REPOS\ROBOTICASTEROIDREDIRECT\BUILD\CMAKEFILES\175BDB7B3DFA56635AE84BEF53287EEC\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/fsebasti1/source/repos/RoboticAsteroidRedirect -BC:/Users/fsebasti1/source/repos/RoboticAsteroidRedirect/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/fsebasti1/source/repos/RoboticAsteroidRedirect/build/RoboticAsteroidRedirect.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

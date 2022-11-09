@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\fsebasti1\source\repos\RoboticAsteroidRedirect\build\CMakeFiles\175bdb7b3dfa56635ae84bef53287eec\NightlyMemoryCheck.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\fsebasti1\source\repos\RoboticAsteroidRedirect\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\fsebasti1\source\repos\RoboticAsteroidRedirect\build\CMakeFiles\NightlyMemoryCheck" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{30DC6A20-6FB2-3ED7-B76A-DBD8B578C897}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
