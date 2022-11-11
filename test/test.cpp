@@ -2,6 +2,8 @@
 #include "../orbmech.h"         /* Functions to be tested */
 #include "../constants.h"       /* Constants for testing inputs */
 
+// Put .exe in build folder for testmate
+
 // Initializations for testing
 extern const double r_orb_jupiter = 7.786e8;          // km wrt sun
 

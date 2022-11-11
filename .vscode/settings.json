@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "cmath": "cpp",
+    },
+
+    "testMate.cpp.test.workingDirectory": "./test"
+}

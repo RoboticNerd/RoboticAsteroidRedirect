@@ -23,9 +23,13 @@ int main()
 	
 	cout << r_moon << endl;
 	
-
-
-
+    double v_inf = hyperbolicExcessSpeed(u_sun, r_orb_earth, 778600000);
+    cout << v_inf << endl;
+    double v_esc = sqrt(pow(v_inf,2)+2*u_earth/6678);
+    cout << v_esc << endl;
+    double d_v = v_esc - circularOrbitSpeed(u_earth,6678);
+    cout << d_v << endl;
+    
 
 	return 0;
 }
