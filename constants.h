@@ -25,7 +25,9 @@ extern const double soi_earth	= 9.29e5;				// km
 extern const double soi_moon	= 6.61e4;				// km
 
 // Typical GTO characteristics  https://conference.sdo.esoc.esa.int/proceedings/isdrw02/paper/10/ISDRW02-paper10.pdf
-extern const double a_GTO           = 24371;            // km - semimajor axis
-extern const double e_GTO           = 0.73;              // - ecentricity
+extern const double a_GTO           = 24371;                // km - semimajor axis
+extern const double e_GTO           = 0.73;                 // - eccentricity
+extern const double r_a_GTO         = a_GTO*(e_GTO + 1);    // km - apoapsis
+extern const double r_p_GTO         = -a_GTO*(e_GTO - 1);    // km - periapsis
 // argument of perigee 180          // deg
 // orbital period 10.52             // hrs
