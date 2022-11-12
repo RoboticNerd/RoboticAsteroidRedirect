@@ -7,3 +7,10 @@ C:/Users/fsebasti1/source/repos/RoboticAsteroidRedirect/build/CMakeFiles/PACKAGE
 C:/Users/fsebasti1/source/repos/RoboticAsteroidRedirect/build/CMakeFiles/RUN_TESTS.dir
 C:/Users/fsebasti1/source/repos/RoboticAsteroidRedirect/build/CMakeFiles/ALL_BUILD.dir
 C:/Users/fsebasti1/source/repos/RoboticAsteroidRedirect/build/CMakeFiles/ZERO_CHECK.dir
+C:/Users/fsebasti1/source/repos/RoboticAsteroidRedirect/build/external/Catch2/CMakeFiles/PACKAGE.dir
+C:/Users/fsebasti1/source/repos/RoboticAsteroidRedirect/build/external/Catch2/CMakeFiles/RUN_TESTS.dir
+C:/Users/fsebasti1/source/repos/RoboticAsteroidRedirect/build/external/Catch2/CMakeFiles/ALL_BUILD.dir
+C:/Users/fsebasti1/source/repos/RoboticAsteroidRedirect/build/external/Catch2/src/CMakeFiles/Catch2.dir
+C:/Users/fsebasti1/source/repos/RoboticAsteroidRedirect/build/external/Catch2/src/CMakeFiles/Catch2WithMain.dir
+C:/Users/fsebasti1/source/repos/RoboticAsteroidRedirect/build/external/Catch2/src/CMakeFiles/PACKAGE.dir
+C:/Users/fsebasti1/source/repos/RoboticAsteroidRedirect/build/external/Catch2/src/CMakeFiles/RUN_TESTS.dir

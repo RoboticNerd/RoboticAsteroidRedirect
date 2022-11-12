@@ -17,11 +17,163 @@
 //Build the testing tree.
 BUILD_TESTING:BOOL=ON
 
+//Read docs/configuration.md for details
+CATCH_CONFIG_ANDROID_LOGWRITE:BOOL=OFF
+
+//Read docs/configuration.md for details
+CATCH_CONFIG_BAZEL_SUPPORT:BOOL=OFF
+
+//Read docs/configuration.md for details
+CATCH_CONFIG_COLOUR_WIN32:BOOL=OFF
+
+//Read docs/configuration.md for details. Must form a valid integer
+// literal.
+CATCH_CONFIG_CONSOLE_WIDTH:STRING=80
+
+//Read docs/configuration.md for details
+CATCH_CONFIG_COUNTER:BOOL=OFF
+
+//Read docs/configuration.md for details
+CATCH_CONFIG_CPP11_TO_STRING:BOOL=OFF
+
+//Read docs/configuration.md for details
+CATCH_CONFIG_CPP17_BYTE:BOOL=OFF
+
+//Read docs/configuration.md for details
+CATCH_CONFIG_CPP17_OPTIONAL:BOOL=OFF
+
+//Read docs/configuration.md for details
+CATCH_CONFIG_CPP17_STRING_VIEW:BOOL=OFF
+
+//Read docs/configuration.md for details
+CATCH_CONFIG_CPP17_UNCAUGHT_EXCEPTIONS:BOOL=OFF
+
+//Read docs/configuration.md for details
+CATCH_CONFIG_CPP17_VARIANT:BOOL=OFF
+
+//Read docs/configuration.md for details. The name of the reporter
+// should be without quotes.
+CATCH_CONFIG_DEFAULT_REPORTER:STRING=console
+
+//Read docs/configuration.md for details
+CATCH_CONFIG_DISABLE:BOOL=OFF
+
+//Read docs/configuration.md for details
+CATCH_CONFIG_DISABLE_EXCEPTIONS:BOOL=OFF
+
+//Read docs/configuration.md for details
+CATCH_CONFIG_DISABLE_EXCEPTIONS_CUSTOM_HANDLER:BOOL=OFF
+
+//Read docs/configuration.md for details
+CATCH_CONFIG_DISABLE_STRINGIFICATION:BOOL=OFF
+
+//Read docs/configuration.md for details
+CATCH_CONFIG_ENABLE_ALL_STRINGMAKERS:BOOL=OFF
+
+//Read docs/configuration.md for details
+CATCH_CONFIG_ENABLE_OPTIONAL_STRINGMAKER:BOOL=OFF
+
+//Read docs/configuration.md for details
+CATCH_CONFIG_ENABLE_PAIR_STRINGMAKER:BOOL=OFF
+
+//Read docs/configuration.md for details
+CATCH_CONFIG_ENABLE_TUPLE_STRINGMAKER:BOOL=OFF
+
+//Read docs/configuration.md for details
+CATCH_CONFIG_ENABLE_VARIANT_STRINGMAKER:BOOL=OFF
+
+//Read docs/configuration.md for details
+CATCH_CONFIG_EXPERIMENTAL_REDIRECT:BOOL=OFF
+
+//Read docs/configuration.md for details
+CATCH_CONFIG_FAST_COMPILE:BOOL=OFF
+
+//Read docs/configuration.md for details
+CATCH_CONFIG_GETENV:BOOL=OFF
+
+//Read docs/configuration.md for details
+CATCH_CONFIG_GLOBAL_NEXTAFTER:BOOL=OFF
+
+//Read docs/configuration.md for details
+CATCH_CONFIG_NOSTDOUT:BOOL=OFF
+
+//Read docs/configuration.md for details
+CATCH_CONFIG_NO_ANDROID_LOGWRITE:BOOL=OFF
+
+//Read docs/configuration.md for details
+CATCH_CONFIG_NO_BAZEL_SUPPORT:BOOL=OFF
+
+//Read docs/configuration.md for details
+CATCH_CONFIG_NO_COLOUR_WIN32:BOOL=OFF
+
+//Read docs/configuration.md for details
+CATCH_CONFIG_NO_COUNTER:BOOL=OFF
+
+//Read docs/configuration.md for details
+CATCH_CONFIG_NO_CPP11_TO_STRING:BOOL=OFF
+
+//Read docs/configuration.md for details
+CATCH_CONFIG_NO_CPP17_BYTE:BOOL=OFF
+
+//Read docs/configuration.md for details
+CATCH_CONFIG_NO_CPP17_OPTIONAL:BOOL=OFF
+
+//Read docs/configuration.md for details
+CATCH_CONFIG_NO_CPP17_STRING_VIEW:BOOL=OFF
+
+//Read docs/configuration.md for details
+CATCH_CONFIG_NO_CPP17_UNCAUGHT_EXCEPTIONS:BOOL=OFF
+
+//Read docs/configuration.md for details
+CATCH_CONFIG_NO_CPP17_VARIANT:BOOL=OFF
+
+//Read docs/configuration.md for details
+CATCH_CONFIG_NO_GETENV:BOOL=OFF
+
+//Read docs/configuration.md for details
+CATCH_CONFIG_NO_GLOBAL_NEXTAFTER:BOOL=OFF
+
+//Read docs/configuration.md for details
+CATCH_CONFIG_NO_POSIX_SIGNALS:BOOL=OFF
+
+//Read docs/configuration.md for details
+CATCH_CONFIG_NO_USE_ASYNC:BOOL=OFF
+
+//Read docs/configuration.md for details
+CATCH_CONFIG_NO_WCHAR:BOOL=OFF
+
+//Read docs/configuration.md for details
+CATCH_CONFIG_NO_WINDOWS_SEH:BOOL=OFF
+
+//Read docs/configuration.md for details
+CATCH_CONFIG_POSIX_SIGNALS:BOOL=OFF
+
+//Read docs/configuration.md for details
+CATCH_CONFIG_PREFIX_ALL:BOOL=OFF
+
+//Read docs/configuration.md for details
+CATCH_CONFIG_USE_ASYNC:BOOL=OFF
+
+//Read docs/configuration.md for details
+CATCH_CONFIG_WCHAR:BOOL=OFF
+
+//Read docs/configuration.md for details
+CATCH_CONFIG_WINDOWS_CRTDBG:BOOL=OFF
+
+//Read docs/configuration.md for details
+CATCH_CONFIG_WINDOWS_SEH:BOOL=OFF
+
+//Build tests, enable warnings, enable Werror, etc
+CATCH_DEVELOPMENT_BUILD:BOOL=OFF
+
+//Install documentation alongside library
+CATCH_INSTALL_DOCS:BOOL=ON
+
+//Install extras (CMake scripts, debugger helpers) alongside library
+CATCH_INSTALL_EXTRAS:BOOL=ON
+
 //Path to a program.
 CMAKE_AR:FILEPATH=C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.29.30133/bin/Hostx86/x64/lib.exe
-
-//No help, variable specified on the command line.
-CMAKE_BUILD_TYPE:STRING=Release
 
 //Semicolon separated list of supported configuration types, only
 // supports Debug, Release, MinSizeRel, and RelWithDebInfo, anything
@@ -85,8 +237,56 @@ CMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE
 //Value Computed by CMake.
 CMAKE_FIND_PACKAGE_REDIRECTS_DIR:STATIC=C:/Users/fsebasti1/source/repos/RoboticAsteroidRedirect/build/CMakeFiles/pkgRedirects
 
+//User executables (bin)
+CMAKE_INSTALL_BINDIR:PATH=bin
+
+//Read-only architecture-independent data (DATAROOTDIR)
+CMAKE_INSTALL_DATADIR:PATH=
+
+//Read-only architecture-independent data root (share)
+CMAKE_INSTALL_DATAROOTDIR:PATH=share
+
+//Documentation root (DATAROOTDIR/doc/PROJECT_NAME)
+CMAKE_INSTALL_DOCDIR:PATH=
+
+//C header files (include)
+CMAKE_INSTALL_INCLUDEDIR:PATH=include
+
+//Info documentation (DATAROOTDIR/info)
+CMAKE_INSTALL_INFODIR:PATH=
+
+//Object code libraries (lib)
+CMAKE_INSTALL_LIBDIR:PATH=lib
+
+//Program executables (libexec)
+CMAKE_INSTALL_LIBEXECDIR:PATH=libexec
+
+//Locale-dependent data (DATAROOTDIR/locale)
+CMAKE_INSTALL_LOCALEDIR:PATH=
+
+//Modifiable single-machine data (var)
+CMAKE_INSTALL_LOCALSTATEDIR:PATH=var
+
+//Man documentation (DATAROOTDIR/man)
+CMAKE_INSTALL_MANDIR:PATH=
+
+//C header files for non-gcc (/usr/include)
+CMAKE_INSTALL_OLDINCLUDEDIR:PATH=/usr/include
+
 //Install path prefix, prepended onto install directories.
 CMAKE_INSTALL_PREFIX:PATH=C:/Program Files/RoboticAsteroidRedirect
+
+//Run-time variable data (LOCALSTATEDIR/run)
+CMAKE_INSTALL_RUNSTATEDIR:PATH=
+
+//System admin executables (sbin)
+CMAKE_INSTALL_SBINDIR:PATH=sbin
+
+//Modifiable architecture-independent data (com)
+CMAKE_INSTALL_SHAREDSTATEDIR:PATH=com
+
+//Read-only single-machine data (etc)
+CMAKE_INSTALL_SYSCONFDIR:PATH=etc
 
 //Path to a program.
 CMAKE_LINKER:FILEPATH=C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.29.30133/bin/Hostx86/x64/link.exe
@@ -246,6 +446,18 @@ CTEST_SUBMIT_RETRY_COUNT:STRING=3
 //How long to wait between timed-out CTest submissions.
 CTEST_SUBMIT_RETRY_DELAY:STRING=5
 
+//Dependencies for the target
+Catch2WithMain_LIB_DEPENDS:STATIC=general;Catch2;
+
+//Value Computed by CMake
+Catch2_BINARY_DIR:STATIC=C:/Users/fsebasti1/source/repos/RoboticAsteroidRedirect/build/external/Catch2
+
+//Value Computed by CMake
+Catch2_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+Catch2_SOURCE_DIR:STATIC=C:/Users/fsebasti1/source/repos/RoboticAsteroidRedirect/external/Catch2
+
 //Maximum time allowed before CTest will kill the test.
 DART_TESTING_TIMEOUT:STRING=1500
 
@@ -345,6 +557,38 @@ CMAKE_GENERATOR_TOOLSET:INTERNAL=host=x86
 //Source directory with the top level CMakeLists.txt file for this
 // project
 CMAKE_HOME_DIRECTORY:INTERNAL=C:/Users/fsebasti1/source/repos/RoboticAsteroidRedirect
+//ADVANCED property for variable: CMAKE_INSTALL_BINDIR
+CMAKE_INSTALL_BINDIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_DATADIR
+CMAKE_INSTALL_DATADIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_DATAROOTDIR
+CMAKE_INSTALL_DATAROOTDIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_DOCDIR
+CMAKE_INSTALL_DOCDIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_INCLUDEDIR
+CMAKE_INSTALL_INCLUDEDIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_INFODIR
+CMAKE_INSTALL_INFODIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_LIBDIR
+CMAKE_INSTALL_LIBDIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_LIBEXECDIR
+CMAKE_INSTALL_LIBEXECDIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_LOCALEDIR
+CMAKE_INSTALL_LOCALEDIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_LOCALSTATEDIR
+CMAKE_INSTALL_LOCALSTATEDIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_MANDIR
+CMAKE_INSTALL_MANDIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_OLDINCLUDEDIR
+CMAKE_INSTALL_OLDINCLUDEDIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_RUNSTATEDIR
+CMAKE_INSTALL_RUNSTATEDIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_SBINDIR
+CMAKE_INSTALL_SBINDIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_SHAREDSTATEDIR
+CMAKE_INSTALL_SHAREDSTATEDIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_SYSCONFDIR
+CMAKE_INSTALL_SYSCONFDIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_LINKER
 CMAKE_LINKER-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_MODULE_LINKER_FLAGS
@@ -360,7 +604,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_MT
 CMAKE_MT-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=1
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=3
 //Platform information initialized
 CMAKE_PLATFORM_INFO_INITIALIZED:INTERNAL=1
 //noop for ranlib
@@ -430,6 +674,10 @@ CPACK_SOURCE_ZIP-ADVANCED:INTERNAL=1
 CTEST_SUBMIT_RETRY_COUNT-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CTEST_SUBMIT_RETRY_DELAY
 CTEST_SUBMIT_RETRY_DELAY-ADVANCED:INTERNAL=1
+//Project GUID
+Catch2WithMain_GUID_CMAKE:INTERNAL=8bd3552a-2cfb-4a59-ab15-2031b97ada1e
+//Project GUID
+Catch2_GUID_CMAKE:INTERNAL=8d538cbe-01bf-4a2e-a98a-6c368fdf13d7
 //ADVANCED property for variable: DART_TESTING_TIMEOUT
 DART_TESTING_TIMEOUT-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: GITCOMMAND
@@ -442,4 +690,6 @@ MEMORYCHECK_COMMAND-ADVANCED:INTERNAL=1
 MEMORYCHECK_SUPPRESSIONS_FILE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: SITE
 SITE-ADVANCED:INTERNAL=1
+//CMAKE_INSTALL_PREFIX during last run
+_GNUInstallDirs_LAST_CMAKE_INSTALL_PREFIX:INTERNAL=C:/Program Files/RoboticAsteroidRedirect
 
