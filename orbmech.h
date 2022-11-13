@@ -33,6 +33,32 @@ double escapeSpeed(double u_relative, double v_inf, double r_orb_initial){
     return v_esc;
 }
 
+
+// DeltaV to park in a circular orbit from a hyperbolic
+    // Example of spacecraft arriving at earth
+    //      v_circ  = parking orbit velocity around earth
+    //      v_inf   = hyperbolic excess speed from arrival parabola to earth orbital speed
+double d_v_circle(double v_circ, double v_inf) {
+    double d_v_circ;
+    d_v_circ = v_circ * ( sqrt( 2 + pow((v_inf/v_circ),2)) - 1); 
+    return d_v_circ;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Transfer elipse departure speed 
     // example of departing from the orbital radius of earth
     //      u_relative   = u_sun
@@ -67,7 +93,7 @@ double deltaV_Departure(double u_relative_lower, double u_relative_higher, doubl
 
 
 
-double r_eclipse(double trueAnomaly, double semimajorAxis, double eccentricity) {
+double r_ellipse(double trueAnomaly, double semimajorAxis, double eccentricity) {
     double radius;
     radius = semimajorAxis * ((1 - pow(eccentricity,2)) / (1 + eccentricity * cos(trueAnomaly)));
     return radius;
