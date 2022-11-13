@@ -17,8 +17,11 @@ using namespace std;
 
 int graphtest();
 int graphingescapes();
+vector<double> asteroidReturnHohman(double m_asteroid, double r_orb_asteroid, double inert_fraction);
 
 int debugi = 0;
+
+const double final_sc_drymass = 10;						// kg 		sc remaining mass on asteroid post burn
 
 
 int main() 
@@ -29,14 +32,23 @@ int main()
 	// calculating arrival dv's ==============================================================
 	// initializations
 	double r_orb_asteroid 	= r_orb_jupiter;			// km 		asteroid radius
-	double m_asteroid 		= 100;						// kg		asteroid mass
-	double final_sc_drymass = 10;						// kg 		sc remaining mass on asteroid post burn
-	double payload_fraction = 0.1;						// 			payload fraction per stage
+	double m_asteroid 		= 1000;						// kg		asteroid mass
+	double inert_fraction = 0.20;						// 			inert fraction per stage of fuel mass
 
-	// departure dv calcs go here
+	vector<double> astVec;
+	astVec = asteroidReturnHohman(m_asteroid, r_orb_asteroid, inert_fraction);
+	
 
-	double d_v_depart = 6.7;  							// km/s  	using worst case (hopefully)
 
+
+
+
+	return 0;
+}
+
+
+
+vector<double> asteroidReturnHohman(double m_asteroid, double r_orb_asteroid, double inert_fraction){
 
 	cout << "===========================================================" << endl;
 	double v_final = v_circ(u_earth, 10000);			// km/s		sc parking orbit velocity
@@ -56,7 +68,7 @@ int main()
 	// Mass calculations now for last burn
 
 	double fuel_final = fuelMass(d_v_final*1000, final_sc_drymass+m_asteroid, isp_RL10);
-	double inert_final = fuel_final * payload_fraction;
+	double inert_final = fuel_final * inert_fraction;
 	fuel_final = fuelMass(d_v_final*1000, final_sc_drymass+m_asteroid+inert_final, isp_RL10);
 	cout << "final burn fuel mass " << fuel_final << " kg" << endl;
 	cout << "===========================================================" << endl;
@@ -80,7 +92,7 @@ int main()
 	double mass_3 = fuel_final + inert_final + final_sc_drymass + m_asteroid;
 	cout << "mass after departing with asteroid         : " << mass_3 << " kg" << endl;
 	double fuel_3 = fuelMass(d_v_3*1000, mass_3, isp_RL10);
-	double inert_3 = fuel_3 * payload_fraction;
+	double inert_3 = fuel_3 * inert_fraction;
 	fuel_3 = fuelMass(d_v_3*1000, mass_3+inert_3, isp_RL10);
 	cout << "third burn fuel mass " << fuel_3 << " kg" << endl;
 	cout << "===========================================================" << endl;
@@ -99,7 +111,7 @@ int main()
 	double mass_2 = mass_3 + fuel_3 + inert_3 - m_asteroid;
 	cout << "mass after burning to join with asteroid   : " << mass_2 << " kg" << endl;
 	double fuel_2 = fuelMass(d_v_2*1000, mass_2, isp_RL10);
-	double inert_2 = fuel_2*payload_fraction;
+	double inert_2 = fuel_2*inert_fraction;
 	fuel_2 = fuelMass(d_v_2*1000, mass_2+inert_2, isp_RL10);
 	cout << "second burn fuel mass :" << fuel_2 << " kg" << endl;
 	cout << "===========================================================" << endl;
@@ -113,9 +125,11 @@ int main()
 	
 	double v_inf_1 = hyperbolicExcessSpeed(u_sun, r_orb_earth, r_orb_asteroid);
 	cout << "hyperbolic excess speed                    : " << v_inf_1 << " km/s" << endl;
-	double v_esc_1 = escapeSpeed(u_earth, v_inf_1, r_p_GTO);          // 															FIX r orb departure
-	cout << "velocity needed to escape earth            : " << v_esc_1 << " km/s" << endl;
-	double v_p_1 = v_ellipse(u_earth, a_GTO, r_p_GTO);
+	double v_esc_1 = escapeSpeed(u_earth, v_inf_1, r_earth+200); 																// using leo
+//	double v_esc_1 = escapeSpeed(u_earth, v_inf_1, r_p_GTO);          // 															FIX r orb departure
+	cout << "velocity needed to escape earth            : " << v_esc_1 << " km/s" << endl;										// using leo
+	double v_p_1 = v_circ(u_earth, r_earth+200);
+//	double v_p_1 = v_ellipse(u_earth, a_GTO, r_p_GTO);
 	cout << "perigee velocity of departure ellipse      : " << v_p_1 << " km/s" << endl;
 	double d_v_1 = abs(v_esc_1 - v_p_1);
 	cout << "d_v of 1st burn                            : " << d_v_1 << " km/s" << endl;
@@ -125,7 +139,7 @@ int main()
 	double mass_1 = fuel_2 + inert_2 + mass_2;
 	cout << "mass after burning to depart for asteroid  : " << mass_1 << " kg" << endl;
 	double fuel_1 = fuelMass(d_v_2*1000, mass_1, isp_RL10);
-	double inert_1 = fuel_1*payload_fraction;
+	double inert_1 = fuel_1*inert_fraction;
 	fuel_1 = fuelMass(d_v_1*1000, mass_1+inert_1, isp_RL10);
 	cout << "1st burn fuel mass " << fuel_1 << " kg" << endl;
 
@@ -135,25 +149,35 @@ int main()
 	// Final things
 	cout << "===========================================================" << endl;
 	cout << "===========================================================" << endl;
-	cout << "Total spacecraft mass in GTO pre-burn      : " << fuel_1 + mass_1 + inert_1 << " kg" << endl;
+	cout << "Total spacecraft mass in LEO pre-burn      : " << fuel_1 + mass_1 + inert_1 << " kg" << endl;
 	cout << "Total spacecraft fuel pre-burn             : " << fuel_1 + fuel_2 + fuel_3 + fuel_final << " kg" << endl;
 	cout << "Total spacecraft inert mass                : " << inert_1 + inert_2 + inert_3 + inert_final + final_sc_drymass << endl;
 	cout << "Asteroid recovered mass to 10,000km orbit  : " << m_asteroid << " kg" << endl;
  	cout << "===========================================================" << endl;
 	cout << "===========================================================" << endl;
 
+	vector<double> returning;
+	returning.reserve(4);
 
+	returning[0] = fuel_1 + mass_1 + inert_1;   									// preburn spacecraft mass
+	returning[1] = fuel_1 + fuel_2 + fuel_3 + fuel_final; 							// fuel mass
+	returning[2] = inert_1 + inert_2 + inert_3 + inert_final + final_sc_drymass;	// inert mass
+	returning[3] = m_asteroid;														// asteroid mass
 
-
-
-
-//	graphingescapes();
-
-
-
-
-	return 0;
+	return returning;
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
