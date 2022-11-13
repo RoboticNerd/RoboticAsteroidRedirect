@@ -21,7 +21,7 @@ int graphingescapes();
 int debugi = 0;
 
 
-int main()
+int main() 
 {
 	cout << "Successful open." << endl;
 	run1();
