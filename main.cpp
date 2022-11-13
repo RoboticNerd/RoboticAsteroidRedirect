@@ -18,6 +18,7 @@ using namespace std;
 int graphtest();
 int graphingescapes();
 vector<double> asteroidReturnHohman(double m_asteroid, double r_orb_asteroid, double inert_fraction, int verbosity);
+int printVec(vector<double> vec);
 
 int debugi = 0;
 
@@ -39,8 +40,43 @@ int main()
 	astVec = asteroidReturnHohman(m_asteroid, r_orb_asteroid, inert_fraction, 1);
 
 	
-	
 
+	// scanning asteroid distances
+
+	double scan_step = 0.1e8;                          	// km step size for heliocentric orbital radii
+	double scan_start = 1.5e6 + r_orb_earth; 			// Edge of Earth's hill sphere (SOI) + orbital radius of earth (helio)
+	m_asteroid = 1000;									// kg 	asteroid mass
+	inert_fraction = 0.20;								// how much inert mass to support spacecraft fuel at that stage
+
+	vector<double> testVec;
+
+	int continue_iter = 1;
+	vector<double> scanning_steps;
+	scanning_steps.push_back(scan_start);
+	vector<double> success_vec;
+	int i = 0;
+	while (continue_iter == 1) {
+		
+		astVec = asteroidReturnHohman(m_asteroid, scanning_steps[i], inert_fraction, 0);
+
+		if (astVec[0] < sls_payload_LEO){
+			success_vec.push_back(1);
+		}
+		else {
+			success_vec.push_back(0);
+		}
+
+		scanning_steps.push_back(scanning_steps[i]+scan_step);
+
+		if (i > 1000){
+			continue_iter = 0;
+		}
+		
+		i++;
+
+	}
+
+	printVec(success_vec);
 
 
 
@@ -140,7 +176,7 @@ vector<double> asteroidReturnHohman(double m_asteroid, double r_orb_asteroid, do
 	// Mass calculations for 1st burn
 	double mass_1 = fuel_2 + inert_2 + mass_2;
 	if (verbosity == 1) {cout << "mass after burning to depart for asteroid  : " << mass_1 << " kg" << endl;}
-	double fuel_1 = fuelMass(d_v_2*1000, mass_1, isp_RL10);
+	double fuel_1 = fuelMass(d_v_1*1000, mass_1, isp_RL10);
 	double inert_1 = fuel_1*inert_fraction;
 	fuel_1 = fuelMass(d_v_1*1000, mass_1+inert_1, isp_RL10);
 	if (verbosity == 1) {cout << "1st burn fuel mass " << fuel_1 << " kg" << endl;}
@@ -154,7 +190,7 @@ vector<double> asteroidReturnHohman(double m_asteroid, double r_orb_asteroid, do
 	cout << "===========================================================" << endl;
 	cout << "Total spacecraft mass in LEO pre-burn      : " << fuel_1 + mass_1 + inert_1 << " kg" << endl;
 	cout << "Total spacecraft fuel pre-burn             : " << fuel_1 + fuel_2 + fuel_3 + fuel_final << " kg" << endl;
-	cout << "Total spacecraft inert mass                : " << inert_1 + inert_2 + inert_3 + inert_final + final_sc_drymass << endl;
+	cout << "Total spacecraft inert mass                : " << inert_1 + inert_2 + inert_3 + inert_final + final_sc_drymass << " kg" << endl;
 	cout << "Asteroid recovered mass to 10,000km orbit  : " << m_asteroid << " kg" << endl;
  	cout << "===========================================================" << endl;
 	cout << "===========================================================" << endl;
@@ -163,18 +199,23 @@ vector<double> asteroidReturnHohman(double m_asteroid, double r_orb_asteroid, do
 
 	// Returning final things
 	vector<double> returning;
-	returning.reserve(4);
 
-	returning[0] = fuel_1 + mass_1 + inert_1;   									// preburn spacecraft mass
-	returning[1] = fuel_1 + fuel_2 + fuel_3 + fuel_final; 							// fuel mass
-	returning[2] = inert_1 + inert_2 + inert_3 + inert_final + final_sc_drymass;	// inert mass
-	returning[3] = m_asteroid;														// asteroid mass
+	returning.push_back(fuel_1 + mass_1 + inert_1);										// preburn spacecraft mass
+	returning.push_back(fuel_1 + fuel_2 + fuel_3 + fuel_final);							// fuel mass
+	returning.push_back(inert_1 + inert_2 + inert_3 + inert_final + final_sc_drymass);	// inert mass
+	returning.push_back(m_asteroid);													// asteroid mass
 
 	return returning;
 }
 
 
+int printVec(vector<double> vec) {
+	for(vector<double>::iterator it = vec.begin(); it != vec.end(); it++) {
+         cout << *it << endl;
+     }
 
+	return 0;
+}
 
 
 

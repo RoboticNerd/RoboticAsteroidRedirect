@@ -17,6 +17,7 @@ extern const double u_jupiter       = 1.26686e8;            // km^3/s^2
 extern const double r_orb_earth		= 1.496e8;			    // km wrt sun
 extern const double r_orb_moon		= 3.85e6;			    // km wrt earth
 extern const double r_orb_jupiter   = 7.786e8;              // km wrt sun
+extern const double r_orb_pluto     = 5.906356272e9;        // km wrt sun
 
 
 // ASE Spacecraft Dynamics
