@@ -16,7 +16,12 @@ extern const double u_jupiter       = 1.26686e8;            // km^3/s^2
 // Orbital Radii
 extern const double r_orb_earth		= 1.496e8;			    // km wrt sun
 extern const double r_orb_moon		= 3.85e6;			    // km wrt earth
+extern const double r_orb_mars      = 2.2613e8;             // km wrt sun
+extern const double r_orb_ast_inner = 3.29e8;               // km wrt sun
+extern const double r_orb_ast_outer = 4.787e8;              // km wrt sun
 extern const double r_orb_jupiter   = 7.786e8;              // km wrt sun
+extern const double r_orb_saturn    = 1.4711e9;             // km wrt sun
+extern const double r_orb_uranus    = 2.9427e9;             // km wrt sun
 extern const double r_orb_pluto     = 5.906356272e9;        // km wrt sun
 
 
@@ -44,7 +49,8 @@ extern const double isp_RL10        = 465;                  // sec
 extern const double isp_NEXTC       = 4100;                 // sec
 
 // SLS Vehicle Constants   https://www.lpi.usra.edu/lunar/constellation/SLS_FactSheet_long.pdf
-extern const double sls_payload_LEO = 130000;               // kg
+extern const double sls_payload_LEO = 130000;               // kg Block 2 config
+// extern const double sls_payload_LEO = 94800.8;              // kg Block 1 config
 
 
 

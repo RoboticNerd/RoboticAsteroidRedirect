@@ -20,6 +20,8 @@ int graphingescapes();
 vector<double> asteroidReturnHohman(double m_asteroid, double r_orb_asteroid, double inert_fraction, int verbosity);
 int printVec(vector<double> vec);
 
+int graphHohman(vector<double> radii, vector<double> asteroid_masses);
+
 int debugi = 0;
 
 const double final_sc_drymass = 10;						// kg 		sc remaining mass on asteroid post burn 					<---- Set
@@ -34,7 +36,7 @@ int main()
 	// initializations
 	double r_orb_asteroid 	= r_orb_jupiter;			// km 		asteroid radius												<---- Set
 	double m_asteroid 		= 1000;						// kg		asteroid mass												<---- Set
-	double inert_fraction = 0.20;						// 			inert fraction per stage of fuel mass						<---- Set
+	double inert_fraction   = 0.20;						// 			inert fraction per stage of fuel mass						<---- Set
 
 	vector<double> astVec;
 	astVec = asteroidReturnHohman(m_asteroid, r_orb_asteroid, inert_fraction, 1);
@@ -43,46 +45,71 @@ int main()
 
 	// scanning asteroid distances
 
-	double scan_step = 0.1e8;                          	// km step size for heliocentric orbital radii
-	double scan_start = 1.5e6 + r_orb_earth; 			// Edge of Earth's hill sphere (SOI) + orbital radius of earth (helio)
-	m_asteroid = 1000;									// kg 	asteroid mass
+	const double scan_step = 0.1e8;                          	// km step size for heliocentric orbital radii
+	const double scan_start = 1.5e6 + r_orb_earth; 			// Edge of Earth's hill sphere (SOI) + orbital radius of earth (helio)
+	const double m_asteroid_step = 10;						// kg 	asteroid mass step size
+	const double m_asteroid_start = 100;						// kg 	asteroid mass size minimum
 	inert_fraction = 0.20;								// how much inert mass to support spacecraft fuel at that stage
+	const double total_steps = 1000;					// total steps to take
 
-	vector<double> testVec;
 
-	int continue_iter = 1;
-	vector<double> scanning_steps;
-	scanning_steps.push_back(scan_start);
-	vector<double> success_vec;
+
+	vector<double> x_scanning_steps;
+	x_scanning_steps.push_back(scan_start);
+	vector<double> y_asteroids;
+	
+
 	int i = 0;
-	while (continue_iter == 1) {
-		
-		astVec = asteroidReturnHohman(m_asteroid, scanning_steps[i], inert_fraction, 0);
+	double sc_seek;
+	double m_asteroid_iter = m_asteroid_start;
 
+	
+
+	for (i=0; i < total_steps; i++){
+		astVec = asteroidReturnHohman(m_asteroid_start, x_scanning_steps[i], inert_fraction, 0);
+		
 		if (astVec[0] < sls_payload_LEO){
-			success_vec.push_back(1);
+			while ( sc_seek < sls_payload_LEO) {
+				astVec = asteroidReturnHohman( m_asteroid_iter, x_scanning_steps[i], inert_fraction, 0);
+				sc_seek = astVec[0];
+
+				m_asteroid_iter = m_asteroid_iter + m_asteroid_step;
+
+			}
+
+
+			y_asteroids.push_back(m_asteroid_iter);
+			sc_seek = 100;
+			m_asteroid_iter = m_asteroid_start;
 		}
 		else {
-			success_vec.push_back(0);
+			y_asteroids.push_back(0);
 		}
+			
+		if (i < total_steps-1){
+			x_scanning_steps.push_back(x_scanning_steps[i] + scan_step);
 
-		scanning_steps.push_back(scanning_steps[i]+scan_step);
-
-		if (i > 1000){
-			continue_iter = 0;
 		}
 		
-		i++;
-
 	}
 
-	printVec(success_vec);
 
-
-
+//	// normalizing x values
+//	for (int i = 0; i <= x_scanning_steps.size(); i++){
+//		x_scanning_steps[i] = x_scanning_steps[i]/r_orb_earth;
+//	}
+	cout << x_scanning_steps.size() << " " << y_asteroids.size() << endl;
+	graphHohman(x_scanning_steps, y_asteroids);
+//	printVec(x_scanning_steps);
 
 	return 0;
 }
+
+
+
+
+
+
 
 
 
@@ -218,7 +245,31 @@ int printVec(vector<double> vec) {
 }
 
 
+int graphHohman(vector<double> radii, vector<double> asteroid_masses){
 
+	RGBABitmapImageReference *imageReference = CreateRGBABitmapImageReference();
+
+	ScatterPlotSeries *series = GetDefaultScatterPlotSeriesSettings();
+
+	series->xs = &radii;
+	series->ys = &asteroid_masses;
+
+
+	ScatterPlotSettings *settings = GetDefaultScatterPlotSettings();
+	settings->width = 900;
+	settings->height = 600;
+	settings->title = toVector(L"Asteroid mass returned to Earth orbit vs asteroid orbit radius");
+	settings->xLabel = toVector(L"Asteroid mass (kg)");
+	settings->yLabel = toVector(L"Asteroid orbital radius (km)");
+	settings->scatterPlotSeries->push_back(series);
+
+	DrawScatterPlotFromSettings(imageReference, settings);
+	vector<double> *pngdata = ConvertToPNG(imageReference->image);
+	WriteToFile(pngdata, "example.png");
+	DeleteImage(imageReference->image);
+	
+	return 0;
+}
 
 
 
