@@ -14,6 +14,7 @@ extern const double u_moon		    = 4.9028695e3;			// km^3/s^2
 extern const double u_jupiter       = 1.26686e8;            // km^3/s^2
 
 // Orbital Radii
+extern const double r_orb_mercury   = 5.7909050e7;          // km wrt sun
 extern const double r_orb_earth		= 1.496e8;			    // km wrt sun
 extern const double r_orb_moon		= 3.85e6;			    // km wrt earth
 extern const double r_orb_mars      = 2.2613e8;             // km wrt sun

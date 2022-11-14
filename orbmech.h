@@ -1,14 +1,24 @@
+#ifndef ORBMECH_H
+#define ORBMECH_H
+
 #include <math.h>           /*sqrt()*/
 
 
 // hyperbolicExcessSpeed relative to the body being orbited //==============================================================================
-double hyperbolicExcessSpeed(double u_relative, double r_orb_lower, double r_orb_higher) {
+double hyperbolicExcessSpeed(double u_relative, double r_orb_1, double r_orb_2) {
     // example leaving earth.
     //      u_relative   = u_sun, 
-    //      r_orb_lower  = r_orb_earth
+    //      r_orb_1  = r_orb_earth
     //      r_orb_higher = r_orb_desiredHelioCentricAltitude 
     double v_inf;
-    v_inf = sqrt(u_relative/r_orb_lower) * (sqrt(2*r_orb_higher/(r_orb_lower+r_orb_higher))-1); 
+    if( r_orb_1 < r_orb_2){
+        v_inf = sqrt(u_relative/r_orb_1) * (sqrt(2*r_orb_2/(r_orb_1+r_orb_2)) - 1); 
+    }
+    else {
+        v_inf = sqrt(u_relative/r_orb_2) * (1 - sqrt(2*r_orb_1/(r_orb_1+r_orb_2))); 
+    }
+    
+    
     return v_inf;
 }
 
@@ -116,3 +126,22 @@ double v_escape(double u_relative, double r_orbit){
     v_esc = sqrt((2*u_relative) / r_orbit);
     return v_esc;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#endif
