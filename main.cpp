@@ -51,13 +51,33 @@ int main()
 int electricalReturnScript(){
 
 	// initializations
-	double r_orb_asteroid 	= r_orb_jupiter;			// km 		asteroid radius												<---- Set
-	double m_asteroid 		= 1000;						// kg		asteroid mass												<---- Set
-	double inert_fraction   = 0.20;						// 			inert fraction per stage of fuel mass						<---- Set
+	const double time_step = 3600;							// seconds
 
-	vector<double> astVec;
-//	astVec = asteroidReturnHohman(m_asteroid, r_orb_asteroid, inert_fraction, 1);
+	const double sc_mass_i = sls_payload_LEO;   			// kg
+	const double sc_ratio = sls_payload_LEO / DAWN_wet;
+	const double dmdt = 5.7415e-6 * sc_ratio;				// kg/s
 
+	const double prop_frac = .396; 							// Mimicking DAWN
+	const double inert_frac = prop_frac-1;
+
+	const double max_mission_time = (sc_mass_i * prop_frac)/dmdt;
+	const double max_fuel_mass = sc_mass_i*prop_frac;
+
+	const double a_i = (10000+r_earth);
+
+	
+	vector<double> scVec_i;
+	scVec_i.push_back(sc_mass_i);
+	scVec_i.push_back(a_i);
+	scVec_i.push_back(dmdt);
+	scVec_i.push_back(time_step);
+	printVec(scVec_i);
+
+	vector<double> scVec_f = scVec_i;
+	scVec_f = electric(scVec_i, scVec_f);
+	scVec_i = scVec_f; 
+	scVec_f = electric(scVec_i, scVec_f);
+	printVec(scVec_f);
 
 	return 0;
 }
@@ -75,7 +95,6 @@ int chemicalReturnScript() {
 
 		// calculating arrival dv's ==============================================================
 	// initializations
-	double r_orb_asteroid 	= r_orb_jupiter;			// km 		asteroid radius												<---- Set
 	double m_asteroid 		= 1000;						// kg		asteroid mass												<---- Set
 	double inert_fraction   = 0.20;						// 			inert fraction per stage of fuel mass						<---- Set
 

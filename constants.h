@@ -53,7 +53,7 @@ extern const double isp_NEXTC       = 4190;                 // sec              
 
 // SLS Vehicle Constants   https://www.lpi.usra.edu/lunar/constellation/SLS_FactSheet_long.pdf
 extern const double sls_payload_LEO = 130000;               // kg Block 2 config
-// extern const double sls_payload_LEO = 94800.8;              // kg Block 1 config
+extern const double DAWN_wet        = 1217.7;                // kg
 
 
 

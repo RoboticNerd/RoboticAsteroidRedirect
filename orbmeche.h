@@ -3,6 +3,13 @@
 
 #include <math.h>           /*sqrt()*/
 
+class SCRecover {
+    public: 
+        double sc_mass;
+        double sc_r;
+        double sc_prop;
+
+};
 
 
 double v_circ_e(double u_relative, double a){
