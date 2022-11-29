@@ -23,8 +23,10 @@ extern const double r_orb_ast_outer = 4.787e8;              // km wrt sun
 extern const double r_orb_jupiter   = 7.786e8;              // km wrt sun
 extern const double r_orb_saturn    = 1.4711e9;             // km wrt sun
 extern const double r_orb_uranus    = 2.9427e9;             // km wrt sun
+extern const double r_orb_kuiper_inner = 4.4e9;             // km wrt sun
+extern const double r_orb_neptune   = 4.4737e9;             // km wrt sun
 extern const double r_orb_pluto     = 5.906356272e9;        // km wrt sun
-
+extern const double r_orb_kuiper_outer = 14.9e9;            // km wrt sun
 
 // ASE Spacecraft Dynamics
 // https://solarsystem.nasa.gov/moons/earths-moon/in-depth/#:~:text=With%20a%20radius%20of%20about,miles%20(384%2C400%20kilometers)%20away.
@@ -47,7 +49,7 @@ extern const double r_p_GTO         = -a_GTO*(e_GTO - 1);   // km - periapsis
 // Propulsion constants
 extern const double g_0             = 9.80665;              // m/s^2
 extern const double isp_RL10        = 465;                  // sec
-extern const double isp_NEXTC       = 4100;                 // sec
+extern const double isp_NEXTC       = 4190;                 // sec                  https://www1.grc.nasa.gov/space/sep/gridded-ion-thrusters-next-c/#:~:text=NEXT%20can%20produce%206.9%20kW,compared%20to%203%2C120%20for%20NSTAR).
 
 // SLS Vehicle Constants   https://www.lpi.usra.edu/lunar/constellation/SLS_FactSheet_long.pdf
 extern const double sls_payload_LEO = 130000;               // kg Block 2 config

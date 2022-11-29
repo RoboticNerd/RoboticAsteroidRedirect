@@ -132,7 +132,12 @@ double v_escape(double u_relative, double r_orbit){
 
 
 
-
+double time_ellipse(double u_rel, double semimajorAxis) {
+    double timee;
+    timee = 2*M_PI/sqrt(u_rel)*pow(semimajorAxis, 1.5);
+    timee = timee/86400/30.4;
+    return timee;
+}
 
 
 

@@ -5,8 +5,9 @@
 
 #include <iostream>
 #include "constants.h"
-#include "orbmech.h"		/*my orbital mechanics methods*/
-#include "masscalc.h"		/*my mass methods*/
+#include "orbmech.h"		/*orbital mechanics methods*/
+#include "orbmeche.h"		/*electric orbital mechanica methods*/
+#include "masscalc.h"		/*mass methods*/
 #include <math.h> 			/*cos()*/
 
 #include <vector>
@@ -20,7 +21,10 @@ int graphingescapes();
 vector<double> asteroidReturnHohman(double m_asteroid, double r_orb_asteroid, double inert_fraction, int verbosity);
 int printVec(vector<double> vec);
 
+int chemicalReturnScript();
+int electricalReturnScript();
 int graphHohman(vector<double> radii, vector<double> asteroid_masses);
+int graphTimeH(vector<double> radii, vector<double> h_time);
 
 int debugi = 0;
 
@@ -30,9 +34,46 @@ extern int flop_iter = 0;
 int main() 
 {
 	cout << "Successful open." << endl;
-	run1();
+
+	//chemicalReturnScript();
+	electricalReturnScript();
+
+
+
 	
-	// calculating arrival dv's ==============================================================
+
+
+
+	return 0;
+}
+
+
+int electricalReturnScript(){
+
+	// initializations
+	double r_orb_asteroid 	= r_orb_jupiter;			// km 		asteroid radius												<---- Set
+	double m_asteroid 		= 1000;						// kg		asteroid mass												<---- Set
+	double inert_fraction   = 0.20;						// 			inert fraction per stage of fuel mass						<---- Set
+
+	vector<double> astVec;
+//	astVec = asteroidReturnHohman(m_asteroid, r_orb_asteroid, inert_fraction, 1);
+
+
+	return 0;
+}
+
+
+
+
+
+
+
+
+int chemicalReturnScript() {
+		// scanning asteroid distances
+
+
+		// calculating arrival dv's ==============================================================
 	// initializations
 	double r_orb_asteroid 	= r_orb_jupiter;			// km 		asteroid radius												<---- Set
 	double m_asteroid 		= 1000;						// kg		asteroid mass												<---- Set
@@ -42,12 +83,10 @@ int main()
 //	astVec = asteroidReturnHohman(m_asteroid, r_orb_asteroid, inert_fraction, 1);
 	astVec = asteroidReturnHohman(100, r_orb_earth*.9, inert_fraction, 1);
 
-	
 
-	// scanning asteroid distances
 
 	const double scan_step = 0.001e8;                          	// km step size for heliocentric orbital radii
-	const double step_count = (r_orb_pluto - r_orb_mercury) / scan_step;
+	const double step_count = (r_orb_ast_outer - r_orb_mercury) / scan_step;
 	
 	const double m_asteroid_step = 1;						// kg 	asteroid mass step size
 	const double m_asteroid_start = 10;						// kg 	asteroid mass size minimum
@@ -59,9 +98,12 @@ int main()
 
 	// Building the scanning range (asteroid orbital radii)
 	vector<double> x_scanning_radii;
+	vector<double> h_time;
 	x_scanning_radii.push_back(r_orb_mercury);
+	h_time.push_back(time_ellipse(u_sun, (x_scanning_radii[0] + r_orb_earth)/2));
 	for (int i = 0; i < step_count; i++){
 		x_scanning_radii.push_back(x_scanning_radii[i] + scan_step);
+		h_time.push_back(time_ellipse(u_sun, (x_scanning_radii[i] + scan_step + r_orb_earth)/2));
 	}
 
 	// Scanning each radii for maximum asteroid size
@@ -73,6 +115,7 @@ int main()
 		// Ignoring SOI masked region
 		if (x_scanning_radii[i] > soi_lower && x_scanning_radii[i] < soi_higher) {
 			y_asteroids.push_back(0);
+			h_time[i] = 0;
 		}
 		else {
 			// Use minimum asteroid mass.
@@ -98,6 +141,17 @@ int main()
 		}
 	}
 	
+	// Converting radii to AU before graphing
+	for (int i = 0; i < x_scanning_radii.size(); i++){
+		x_scanning_radii[i] = x_scanning_radii[i] / r_orb_earth; 
+	}
+
+	// Optional clipping of asteroid mass for graphing
+	for (int i = 0; i < x_scanning_radii.size(); i++){
+		if(y_asteroids[i] >1000){
+			y_asteroids[i] = 1000;
+		}
+	}
 
 	
 //	// normalizing x values
@@ -105,14 +159,12 @@ int main()
 //		x_scanning_radii[i] = x_scanning_radii[i]/r_orb_earth;
 //	}
 	cout << "hohman calls : " << flop_iter << endl;
-	cout << x_scanning_radii.size() << " " << y_asteroids.size() << endl;
+	cout << x_scanning_radii.size() << " " << y_asteroids.size() << " " << h_time.size() << endl;
 	graphHohman(x_scanning_radii, y_asteroids);
+	graphTimeH(x_scanning_radii, h_time);
 //	printVec(x_scanning_radii);
 
-	return 0;
 }
-
-
 
 
 
@@ -131,7 +183,7 @@ vector<double> asteroidReturnHohman(double m_asteroid, double r_orb_asteroid, do
 
 		double v_earth = v_circ(u_sun, r_orb_earth);		// km/s 	earth orbital velocity
 
-		double aaa = r_orb_asteroid + r_orb_earth;
+		double aaa = (r_orb_asteroid + r_orb_earth)/2;
 		double v_p_f = v_ellipse(u_sun, aaa, r_orb_earth);						// km/s  perigee arrival velocity
 		if (verbosity == 1) {cout << "velocity of arrival ellipse perigee        : " << v_p_f << " km/s" << endl;}
 
@@ -249,7 +301,7 @@ vector<double> asteroidReturnHohman(double m_asteroid, double r_orb_asteroid, do
 
 		double v_earth = v_circ(u_sun, r_orb_earth);		// km/s 	earth orbital velocity
 
-		double aaa = r_orb_asteroid + r_orb_earth;
+		double aaa = (r_orb_asteroid + r_orb_earth)/2;
 		double v_a_f = v_ellipse(u_sun, aaa, r_orb_earth);						// km/s  perigee arrival velocity
 		if (verbosity == 1) {cout << "velocity of arrival ellipse apogee         : " << v_a_f << " km/s" << endl;}
 
@@ -387,22 +439,48 @@ int graphHohman(vector<double> radii, vector<double> asteroid_masses){
 
 
 	ScatterPlotSettings *settings = GetDefaultScatterPlotSettings();
-	settings->width = 1800;
-	settings->height = 1200;
-	settings->title = toVector(L"Asteroid mass returned to Earth orbit vs asteroid orbit radius");
+	settings->width = 1200;
+	settings->height = 800;
+	settings->yMin = 0;
+	settings->yMax = 2500;
+	settings->title = toVector(L"Asteroid mass returned to Earth orbit vs asteroid orbital radii");
 	settings->xLabel = toVector(L"Asteroid mass (kg)");
-	settings->yLabel = toVector(L"Asteroid orbital radius (km)");
+	settings->yLabel = toVector(L"Asteroid orbital radius (AU)");
 	settings->scatterPlotSeries->push_back(series);
 
 	DrawScatterPlotFromSettings(imageReference, settings);
 	vector<double> *pngdata = ConvertToPNG(imageReference->image);
-	WriteToFile(pngdata, "example.png");
+	WriteToFile(pngdata, "hohmann.png");
 	DeleteImage(imageReference->image);
 	
 	return 0;
 }
 
+int graphTimeH(vector<double> radii, vector<double> h_time){
 
+	RGBABitmapImageReference *imageReference = CreateRGBABitmapImageReference();
+
+	ScatterPlotSeries *series = GetDefaultScatterPlotSeriesSettings();
+
+	series->xs = &radii;
+	series->ys = &h_time;
+
+
+	ScatterPlotSettings *settings = GetDefaultScatterPlotSettings();
+	settings->width = 1200;
+	settings->height = 800;
+	settings->title = toVector(L"Mission time for asteroid retrieval vs asteroid orbital radii");
+	settings->xLabel = toVector(L"Total Mission Time (months)");
+	settings->yLabel = toVector(L"Asteroid orbital radius (AU)");
+	settings->scatterPlotSeries->push_back(series);
+
+	DrawScatterPlotFromSettings(imageReference, settings);
+	vector<double> *pngdata = ConvertToPNG(imageReference->image);
+	WriteToFile(pngdata, "h_time.png");
+	DeleteImage(imageReference->image);
+	
+	return 0;
+}
 
 
 
@@ -459,9 +537,9 @@ int graphingescapes(){
 	ScatterPlotSettings *settings = GetDefaultScatterPlotSettings();
 	settings->width = 1800;
 	settings->height = 1200;
-	settings->title = toVector(L"Satellite dV required for departure at various radii");
+	settings->title = toVector(L"Satellite dV required for departure vs orbital radii");
 	settings->xLabel = toVector(L"dV required (km/s)");
-	settings->yLabel = toVector(L"Orbital Radius (km)");
+	settings->yLabel = toVector(L"Orbital Radius (AU)");
 	settings->scatterPlotSeries->push_back(series);
 
 	DrawScatterPlotFromSettings(imageReference, settings);
