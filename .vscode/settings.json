@@ -3,7 +3,8 @@
         "cmath": "cpp",
         "vector": "cpp",
         "iostream": "cpp",
-        "cstdlib": "cpp"
+        "cstdlib": "cpp",
+        "iosfwd": "cpp"
     },
 
     "testMate.cpp.test.workingDirectory": "./test"

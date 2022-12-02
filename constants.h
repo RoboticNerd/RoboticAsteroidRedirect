@@ -37,6 +37,7 @@ extern const double r_moon          = 1740;                 // km
 // Sphere of Influences
 extern const double soi_earth	    = 9.29e5;				// km
 extern const double soi_moon	    = 6.61e4;				// km
+extern const double earth_soi       = 924659;               // km
 
 // Typical GTO characteristics  https://conference.sdo.esoc.esa.int/proceedings/isdrw02/paper/10/ISDRW02-paper10.pdf
 extern const double a_GTO           = 24371;                // km - semimajor axis
@@ -53,7 +54,9 @@ extern const double isp_NEXTC       = 4190;                 // sec              
 
 // SLS Vehicle Constants   https://www.lpi.usra.edu/lunar/constellation/SLS_FactSheet_long.pdf
 extern const double sls_payload_LEO = 130000;               // kg Block 2 config
-extern const double DAWN_wet        = 1217.7;                // kg
+extern const double sls_payload_helio = 44905.6;            // kg Block 2 config
+extern const double DAWN_wet        = 1217.7;               // kg
+
 
 
 

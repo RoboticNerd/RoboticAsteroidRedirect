@@ -141,10 +141,26 @@ double time_ellipse(double u_rel, double semimajorAxis) {
 
 
 
+double r_soi(double u_outer, double u_inner, double r_inner){
+    double radiuss;
+    radiuss = pow(u_outer/u_inner, .4)*r_inner;
+    
+    cout << "SOI = " << radiuss << endl; 
+    
+    return radiuss;
+}
 
 
 
 
+
+int printVec(vector<double> vec) {
+	for(vector<double>::iterator it = vec.begin(); it != vec.end(); it++) {
+         cout << *it << endl;
+     }
+
+	return 0;
+}
 
 
 
