@@ -16,7 +16,7 @@
 #include "electricscript.cpp"
 
 using namespace std;
-
+//
 int graphtest();
 int graphingescapes();
 vector<double> asteroidReturnHohman(double m_asteroid, double r_orb_asteroid, double inert_fraction, int verbosity);
